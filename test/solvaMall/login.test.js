@@ -95,10 +95,40 @@ describe ("Cek Login Page", function(){
         await driver.wait(until.elementsLocated(By.css('.v-btn.v-btn--block.v-btn--has-bg.theme--light.v-size--default.primary')));
         const buttonLogin = await driver.findElements(By.css('.v-btn.v-btn--block.v-btn--has-bg.theme--light.v-size--default.primary'));
         buttonLogin[0].click();
-        await driver.wait(until.elementsLocated(By.css('.mt-4.text-caption.error--text')));
-        const errorMessage = await driver.findElements(By.css('.mt-4.text-caption.error--text'));
+        await driver.wait(until.elementsLocated(By.css('.mt-4.text-caption.error--text > div')));
+        const errorMessage = await driver.findElements(By.css('.mt-4.text-caption.error--text > div'));
         const errorChar = await errorMessage[0];
-        // console.log(errorChar);
+        // console.log(errorMessage);
+        expect(await errorChar.getText()).toBe(errorShouldBe);
+
+      })
+
+      test('Should Be user inactive', async() => {
+        const errorShouldBe = "Your access has been revoked, please contact your team";
+        await inputEmailInputElement(driver,"user.inactive@member.id");
+        await inputPasswordElement(driver,"memberid123");
+        await driver.wait(until.elementsLocated(By.css('.v-btn.v-btn--block.v-btn--has-bg.theme--light.v-size--default.primary')));
+        const buttonLogin = await driver.findElements(By.css('.v-btn.v-btn--block.v-btn--has-bg.theme--light.v-size--default.primary'));
+        buttonLogin[0].click();
+        await driver.wait(until.elementsLocated(By.css('.mt-4.text-caption.error--text > div')));
+        const errorMessage = await driver.findElements(By.css('.mt-4.text-caption.error--text > div'));
+        const errorChar = await errorMessage[0];
+        // console.log(errorMessage);
+        expect(await errorChar.getText()).toBe(errorShouldBe);
+
+      })
+      
+      test('Should Be Login ', async() => {
+        const errorShouldBe = "Your access has been revoked, please contact your team";
+        await inputEmailInputElement(driver,"user.inactive@member.id");
+        await inputPasswordElement(driver,"memberid123");
+        await driver.wait(until.elementsLocated(By.css('.v-btn.v-btn--block.v-btn--has-bg.theme--light.v-size--default.primary')));
+        const buttonLogin = await driver.findElements(By.css('.v-btn.v-btn--block.v-btn--has-bg.theme--light.v-size--default.primary'));
+        buttonLogin[0].click();
+        await driver.wait(until.elementsLocated(By.css('.mt-4.text-caption.error--text > div')));
+        const errorMessage = await driver.findElements(By.css('.mt-4.text-caption.error--text > div'));
+        const errorChar = await errorMessage[0];
+        // console.log(errorMessage);
         expect(await errorChar.getText()).toBe(errorShouldBe);
 
       })
